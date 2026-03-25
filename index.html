@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>木舟博客 | 记录灵感与生活</title>
+  <title>Matt的博客 | 记录灵感与生活</title>
   <meta name="description" content="一个简洁、有质感的网页端博客，支持点击进入文章详情页。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,50 +14,67 @@
   <div class="site-shell">
     <header class="hero">
       <nav class="topbar">
-        <a class="brand" href="index.html">木舟博客</a>
+        <a class="brand" href="index.html" data-i18n="brand">Matt的博客</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">菜单</button>
         <div class="nav-links" id="nav-links">
-          <a href="#featured">精选文章</a>
-          <a href="#latest">最新文章</a>
-          <a href="#topics">专题</a>
-          <a href="#about">关于我</a>
+          <a href="#featured" data-i18n="navFeatured">精选文章</a>
+          <a href="#latest" data-i18n="navLatest">最新文章</a>
+          <a href="#topics" data-i18n="navTopics">专题</a>
+          <a href="#about" data-i18n="navAbout">关于我</a>
+        </div>
+        <div class="lang-switch" aria-label="Language switch">
+          <button class="lang-switch__button is-active" type="button" data-lang="zh">中</button>
+          <button class="lang-switch__button" type="button" data-lang="en">EN</button>
         </div>
       </nav>
 
       <section class="hero-grid" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">PERSONAL BLOG</p>
-          <h1>把日常思考，写成值得回看的文字。</h1>
-          <p class="hero-text">
+          <p class="eyebrow" data-i18n="heroEyebrow">PERSONAL BLOG</p>
+          <h1 data-i18n="heroTitle">把日常思考，写成值得回看的文字。</h1>
+          <p class="hero-text" data-i18n="heroText">
             这里记录技术、设计、生活观察和创作灵感。希望每一篇文章，都像留给未来自己的明信片。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="article.html?post=blog-design-notes">开始阅读</a>
-            <a class="button button-secondary" href="#about">认识作者</a>
+            <a class="button button-primary" href="article.html?post=blog-design-notes" data-i18n="heroPrimary">开始阅读</a>
+            <a class="button button-secondary" href="#about" data-i18n="heroSecondary">认识作者</a>
           </div>
           <ul class="hero-stats">
             <li>
               <strong>48</strong>
-              <span>原创文章</span>
+              <span data-i18n="statPosts">原创文章</span>
             </li>
             <li>
               <strong>12k</strong>
-              <span>月度阅读</span>
+              <span data-i18n="statReads">月度阅读</span>
             </li>
             <li>
               <strong>4</strong>
-              <span>核心专题</span>
+              <span data-i18n="statTopics">核心专题</span>
             </li>
           </ul>
         </div>
 
         <aside class="hero-card">
-          <span class="card-tag">本周推荐</span>
-          <h2>如何建立一个让人想读下去的个人博客？</h2>
-          <p>
+          <div class="weather-widget" id="weather-widget" aria-live="polite">
+            <div class="weather-widget__icon weather-icon weather-icon--sunny" id="weather-icon" aria-hidden="true">
+              <span class="weather-icon__sun"></span>
+              <span class="weather-icon__cloud"></span>
+              <span class="weather-icon__rain"></span>
+            </div>
+            <div class="weather-widget__content">
+              <p class="weather-widget__label" data-i18n="weatherLabel">今日天气</p>
+              <h3 class="weather-widget__temp" id="weather-temp">--°C</h3>
+              <p class="weather-widget__summary" id="weather-summary">正在获取天气...</p>
+              <p class="weather-widget__date" id="weather-date">--</p>
+            </div>
+          </div>
+          <span class="card-tag" data-i18n="weekPick">本周推荐</span>
+          <h2 data-i18n="heroCardTitle">如何建立一个让人想读下去的个人博客？</h2>
+          <p data-i18n="heroCardText">
             从内容定位、视觉氛围到更新节奏，聊聊一个博客真正吸引人的地方，不只是“能看”，而是“想回来”。
           </p>
-          <a href="article.html?post=build-a-readable-blog" class="text-link">阅读全文</a>
+          <a href="article.html?post=build-a-readable-blog" class="text-link" data-i18n="readFull">阅读全文</a>
         </aside>
       </section>
     </header>
@@ -65,61 +82,61 @@
     <main>
       <section class="featured-section" id="featured">
         <div class="section-heading">
-          <p class="eyebrow">FEATURED STORY</p>
-          <h2>编辑精选</h2>
+          <p class="eyebrow" data-i18n="featuredEyebrow">FEATURED STORY</p>
+          <h2 data-i18n="featuredTitle">编辑精选</h2>
         </div>
         <article class="featured-story">
           <a class="featured-visual link-panel" href="article.html?post=blog-design-notes" aria-label="阅读精选文章"></a>
           <div class="featured-content">
-            <p class="meta">2026.03.25 · 阅读 8 分钟</p>
-            <h3><a class="article-link" href="article.html?post=blog-design-notes">从“搭个页面”到“拥有作品感”：我的博客设计笔记</a></h3>
-            <p>
+            <p class="meta" data-i18n="featuredMeta">2026.03.25 · 阅读 8 分钟</p>
+            <h3><a class="article-link" href="article.html?post=blog-design-notes" data-i18n="featuredArticleTitle">从“搭个页面”到“拥有作品感”：我的博客设计笔记</a></h3>
+            <p data-i18n="featuredArticleText1">
               很多个人博客在技术上是完整的，但在气质上仍然像模板。真正有记忆点的页面，往往不是元素更多，而是有明确的节奏、留白和情绪。
             </p>
-            <p>
+            <p data-i18n="featuredArticleText2">
               这篇文章分享我如何用排版、色彩和内容组织，把一个普通博客首页打磨成更有温度的个人站点。
             </p>
-            <a class="button button-primary" href="article.html?post=blog-design-notes">进入文章详情</a>
+            <a class="button button-primary" href="article.html?post=blog-design-notes" data-i18n="featuredButton">进入文章详情</a>
           </div>
         </article>
       </section>
 
       <section class="posts-section" id="latest">
         <div class="section-heading">
-          <p class="eyebrow">LATEST POSTS</p>
-          <h2>最新文章</h2>
+          <p class="eyebrow" data-i18n="latestEyebrow">LATEST POSTS</p>
+          <h2 data-i18n="latestTitle">最新文章</h2>
         </div>
         <div class="post-grid">
           <article class="post-card">
             <a class="post-card-link" href="article.html?post=frontend-feels-premium">
-              <span class="post-category">技术随笔</span>
-              <h3>前端页面为什么总是“能用但不高级”？</h3>
-              <p>从信息层级、对齐规则和视觉焦点出发，拆解页面质感的差异到底来自哪里。</p>
-              <div class="post-meta">03.21 · 5 分钟</div>
+              <span class="post-category" data-i18n="post1Category">技术随笔</span>
+              <h3 data-i18n="post1Title">前端页面为什么总是“能用但不高级”？</h3>
+              <p data-i18n="post1Text">从信息层级、对齐规则和视觉焦点出发，拆解页面质感的差异到底来自哪里。</p>
+              <div class="post-meta" data-i18n="post1Meta">03.21 · 5 分钟</div>
             </a>
           </article>
           <article class="post-card">
             <a class="post-card-link" href="article.html?post=slow-writing">
-              <span class="post-category">生活观察</span>
-              <h3>慢下来之后，我反而写得更快了</h3>
-              <p>关于如何摆脱“必须持续输出”的焦虑，重新找回写作的节奏感。</p>
-              <div class="post-meta">03.18 · 4 分钟</div>
+              <span class="post-category" data-i18n="post2Category">生活观察</span>
+              <h3 data-i18n="post2Title">慢下来之后，我反而写得更快了</h3>
+              <p data-i18n="post2Text">关于如何摆脱“必须持续输出”的焦虑，重新找回写作的节奏感。</p>
+              <div class="post-meta" data-i18n="post2Meta">03.18 · 4 分钟</div>
             </a>
           </article>
           <article class="post-card">
             <a class="post-card-link" href="article.html?post=content-planning">
-              <span class="post-category">创作方法</span>
-              <h3>一个人维护博客，可以如何规划内容选题？</h3>
-              <p>分享我常用的选题池、系列化写法，以及让更新更轻松的内容组织方式。</p>
-              <div class="post-meta">03.14 · 6 分钟</div>
+              <span class="post-category" data-i18n="post3Category">创作方法</span>
+              <h3 data-i18n="post3Title">一个人维护博客，可以如何规划内容选题？</h3>
+              <p data-i18n="post3Text">分享我常用的选题池、系列化写法，以及让更新更轻松的内容组织方式。</p>
+              <div class="post-meta" data-i18n="post3Meta">03.14 · 6 分钟</div>
             </a>
           </article>
           <article class="post-card">
             <a class="post-card-link" href="article.html?post=homepage-invitation">
-              <span class="post-category">设计灵感</span>
-              <h3>我喜欢的博客首页，都有一种“邀请感”</h3>
-              <p>不是夸张的视觉，而是让读者一进入页面就知道为什么要留下来。</p>
-              <div class="post-meta">03.09 · 3 分钟</div>
+              <span class="post-category" data-i18n="post4Category">设计灵感</span>
+              <h3 data-i18n="post4Title">我喜欢的博客首页，都有一种“邀请感”</h3>
+              <p data-i18n="post4Text">不是夸张的视觉，而是让读者一进入页面就知道为什么要留下来。</p>
+              <div class="post-meta" data-i18n="post4Meta">03.09 · 3 分钟</div>
             </a>
           </article>
         </div>
@@ -127,25 +144,25 @@
 
       <section class="topics-section" id="topics">
         <div class="section-heading">
-          <p class="eyebrow">TOPICS</p>
-          <h2>核心专题</h2>
+          <p class="eyebrow" data-i18n="topicsEyebrow">TOPICS</p>
+          <h2 data-i18n="topicsTitle">核心专题</h2>
         </div>
         <div class="topic-grid">
           <article class="topic-card">
-            <h3>网页设计</h3>
-            <p>界面审美、结构布局、色彩体系和页面氛围的持续记录。</p>
+            <h3 data-i18n="topic1Title">网页设计</h3>
+            <p data-i18n="topic1Text">界面审美、结构布局、色彩体系和页面氛围的持续记录。</p>
           </article>
           <article class="topic-card">
-            <h3>前端实践</h3>
-            <p>关于 HTML、CSS、JavaScript 与实际项目体验的整理和复盘。</p>
+            <h3 data-i18n="topic2Title">前端实践</h3>
+            <p data-i18n="topic2Text">关于 HTML、CSS、JavaScript 与实际项目体验的整理和复盘。</p>
           </article>
           <article class="topic-card">
-            <h3>个人成长</h3>
-            <p>写作习惯、学习方法、时间管理，以及创作过程中的思考。</p>
+            <h3 data-i18n="topic3Title">个人成长</h3>
+            <p data-i18n="topic3Text">写作习惯、学习方法、时间管理，以及创作过程中的思考。</p>
           </article>
           <article class="topic-card">
-            <h3>灵感收藏</h3>
-            <p>电影、书籍、摄影和日常片段里，那些值得保存的瞬间。</p>
+            <h3 data-i18n="topic4Title">灵感收藏</h3>
+            <p data-i18n="topic4Text">电影、书籍、摄影和日常片段里，那些值得保存的瞬间。</p>
           </article>
         </div>
       </section>
@@ -153,19 +170,19 @@
       <section class="about-section" id="about">
         <div class="about-card">
           <div>
-            <p class="eyebrow">ABOUT THE AUTHOR</p>
-            <h2>你好，我是这个博客的写作者。</h2>
-            <p>
+            <p class="eyebrow" data-i18n="aboutEyebrow">ABOUT THE AUTHOR</p>
+            <h2 data-i18n="aboutTitle">你好，我是这个博客的写作者。</h2>
+            <p data-i18n="aboutText">
               我喜欢把抽象的想法写成清晰的文字，也喜欢把普通网页做得更耐看一些。这个博客既是内容主页，也是我持续创作的数字空间。
             </p>
           </div>
           <form class="subscribe-form" id="subscribe-form">
-            <label for="email">订阅更新</label>
+            <label for="email" data-i18n="subscribeLabel">订阅更新</label>
             <div class="subscribe-row">
-              <input id="email" name="email" type="email" placeholder="输入你的邮箱地址" required>
-              <button type="submit" class="button button-primary">订阅</button>
+              <input id="email" name="email" type="email" placeholder="输入你的邮箱地址" data-i18n-placeholder="subscribePlaceholder" required>
+              <button type="submit" class="button button-primary" data-i18n="subscribeButton">订阅</button>
             </div>
-            <p class="form-note" id="form-note">每月推送 1-2 次精选文章，不会打扰你。</p>
+            <p class="form-note" id="form-note" data-i18n="subscribeNote">每月推送 1-2 次精选文章，不会打扰你。</p>
           </form>
         </div>
       </section>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文章详情 | 木舟博客</title>
+  <title>文章详情 | Matt的博客</title>
   <meta name="description" content="博客文章详情页">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +13,13 @@
 <body>
   <div class="site-shell">
     <nav class="topbar article-topbar">
-      <a class="brand" href="index.html">木舟博客</a>
+      <a class="brand" href="index.html" data-i18n="brand">Matt的博客</a>
       <div class="nav-links article-nav-links">
-        <a href="index.html#latest">返回文章列表</a>
+        <a href="index.html#latest" data-i18n="backToList">返回文章列表</a>
+      </div>
+      <div class="lang-switch" aria-label="Language switch">
+        <button class="lang-switch__button is-active" type="button" data-lang="zh">中</button>
+        <button class="lang-switch__button" type="button" data-lang="en">EN</button>
       </div>
     </nav>
 
@@ -33,7 +37,7 @@
         <section class="article-body" id="article-body"></section>
 
         <footer class="article-footer">
-          <a class="button button-primary" href="index.html#latest">回到首页继续阅读</a>
+          <a class="button button-primary" href="index.html#latest" data-i18n="backHome">回到首页继续阅读</a>
         </footer>
       </article>
     </main>

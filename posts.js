@@ -1,81 +1,196 @@
 window.BLOG_POSTS = {
   "blog-design-notes": {
-    title: "从“搭个页面”到“拥有作品感”：我的博客设计笔记",
-    category: "设计与创作",
+    title: {
+      zh: "从“搭个页面”到“拥有作品感”：我的博客设计笔记",
+      en: "From a Page to a Presence: Notes on Designing My Blog"
+    },
+    category: {
+      zh: "设计与创作",
+      en: "Design and Writing"
+    },
     date: "2026.03.25",
-    readingTime: "8 分钟",
+    readingTime: {
+      zh: "8 分钟",
+      en: "8 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=80",
-    intro: "真正让人记住的博客，不只是信息完整，而是页面本身有情绪、有节奏，也有作者自己的判断。",
-    paragraphs: [
-      "很多人做博客时，会先把注意力放在功能上：导航有没有、文章能不能显示、样式是否整齐。这当然重要，但如果页面只停留在“可用”，读者通常不会停留太久。",
-      "我越来越在意首页的第一印象。它像一本书的封面，也像一间工作室的门口。一个好的博客首页，应该让人一眼看出你关心什么、你如何表达，以及读者为什么值得继续往下读。",
-      "在设计这个博客时，我刻意把重点放在三件事上：排版节奏、内容层次和氛围感。标题要有存在感，摘要要足够克制，按钮和卡片则应该承担明确的引导作用，而不是堆满视觉装饰。",
-      "我也把“可点击”这件事当成体验的一部分。文章列表不仅是展示，更应该自然地把读者带去详情页，让阅读路径从首页开始一路顺畅。一个博客真正成立，往往就在这些细节里。"
-    ]
+    intro: {
+      zh: "真正让人记住的博客，不只是信息完整，而是页面本身有情绪、有节奏，也有作者自己的判断。",
+      en: "A memorable blog is not only complete in content. It also carries mood, rhythm, and the author's point of view."
+    },
+    paragraphs: {
+      zh: [
+        "很多人做博客时，会先把注意力放在功能上：导航有没有、文章能不能显示、样式是否整齐。这当然重要，但如果页面只停留在“可用”，读者通常不会停留太久。",
+        "我越来越在意首页的第一印象。它像一本书的封面，也像一间工作室的门口。一个好的博客首页，应该让人一眼看出你关心什么、你如何表达，以及读者为什么值得继续往下读。",
+        "在设计这个博客时，我刻意把重点放在三件事上：排版节奏、内容层次和氛围感。标题要有存在感，摘要要足够克制，按钮和卡片则应该承担明确的引导作用，而不是堆满视觉装饰。",
+        "我也把“可点击”这件事当成体验的一部分。文章列表不仅是展示，更应该自然地把读者带去详情页，让阅读路径从首页开始一路顺畅。一个博客真正成立，往往就在这些细节里。"
+      ],
+      en: [
+        "When people build a blog, they often start with functionality: does the navigation work, do the posts render, is the layout clean. All of that matters, but if a page only feels usable, readers rarely stay for long.",
+        "I care more and more about the first impression of a homepage. It feels like a book cover and a studio entrance at the same time. A strong blog homepage should quickly show what you care about, how you express it, and why someone should keep reading.",
+        "While designing this blog, I focused on three things: typographic rhythm, content hierarchy, and atmosphere. Titles should feel present, summaries should stay restrained, and buttons and cards should guide the reader instead of competing for attention.",
+        "I also treated clickability as part of the reading experience. A post list should not only display content. It should lead readers naturally into the full article. A blog starts to feel real when these small details work together."
+      ]
+    }
   },
   "build-a-readable-blog": {
-    title: "如何建立一个让人想读下去的个人博客？",
-    category: "博客搭建",
+    title: {
+      zh: "如何建立一个让人想读下去的个人博客？",
+      en: "How Do You Build a Personal Blog People Want to Read?"
+    },
+    category: {
+      zh: "博客搭建",
+      en: "Blog Building"
+    },
     date: "2026.03.24",
-    readingTime: "7 分钟",
+    readingTime: {
+      zh: "7 分钟",
+      en: "7 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
-    intro: "博客吸引人的核心，不在于页面多复杂，而在于它有没有清晰表达“这里值得停留”。",
-    paragraphs: [
-      "一个让人愿意读下去的博客，首先得有明确定位。你写技术、写生活、写观察，还是写创作过程？当首页能快速传达这个方向时，读者更容易建立期待。",
-      "第二个关键是节奏。首页并不是把所有内容堆上去，而是通过精选文章、最新文章和专题分类，告诉读者先看什么、再看什么。好的页面结构，本质上是在替读者做选择。",
-      "最后是持续更新的感觉。哪怕文章不多，只要整体表达统一、内容质量稳定，博客就会显得很鲜活。读者回来的原因，不只是因为信息，而是因为他们记住了你的表达方式。"
-    ]
+    intro: {
+      zh: "博客吸引人的核心，不在于页面多复杂，而在于它有没有清晰表达“这里值得停留”。",
+      en: "What makes a blog compelling is not complexity. It is the clarity of why this place is worth staying in."
+    },
+    paragraphs: {
+      zh: [
+        "一个让人愿意读下去的博客，首先得有明确定位。你写技术、写生活、写观察，还是写创作过程？当首页能快速传达这个方向时，读者更容易建立期待。",
+        "第二个关键是节奏。首页并不是把所有内容堆上去，而是通过精选文章、最新文章和专题分类，告诉读者先看什么、再看什么。好的页面结构，本质上是在替读者做选择。",
+        "最后是持续更新的感觉。哪怕文章不多，只要整体表达统一、内容质量稳定，博客就会显得很鲜活。读者回来的原因，不只是因为信息，而是因为他们记住了你的表达方式。"
+      ],
+      en: [
+        "A blog people want to keep reading starts with a clear point of view. Do you write about technology, life, observation, or the creative process? When the homepage communicates that quickly, readers know what to expect.",
+        "The second key is rhythm. A homepage should not dump everything at once. It should guide readers through featured stories, recent posts, and topic groups so they know what to read first.",
+        "Finally, a good blog feels alive. Even with a small number of posts, a consistent voice and steady quality make the site feel worth returning to. People come back not only for information, but for the way you express it."
+      ]
+    }
   },
   "frontend-feels-premium": {
-    title: "前端页面为什么总是“能用但不高级”？",
-    category: "技术随笔",
+    title: {
+      zh: "前端页面为什么总是“能用但不高级”？",
+      en: "Why Do Frontend Pages Often Work but Still Feel Unpolished?"
+    },
+    category: {
+      zh: "技术随笔",
+      en: "Frontend Notes"
+    },
     date: "2026.03.21",
-    readingTime: "5 分钟",
+    readingTime: {
+      zh: "5 分钟",
+      en: "5 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
-    intro: "决定页面质感的，通常不是大改，而是信息密度、对齐方式和视觉重心这些小地方。",
-    paragraphs: [
-      "很多页面的问题不在于缺少元素，而在于所有元素都在争夺注意力。标题、按钮、卡片、颜色如果同时很强，页面就会变得嘈杂。",
-      "真正高级的页面，通常有清晰主次。用户先看到什么，再看到什么，最后在哪停下来，这些都应该被设计。",
-      "当你开始关注留白、字号对比、模块边界和文案长度时，页面会明显变得更从容。高级感并不是堆特效，而是把每个决定都做得更克制。"
-    ]
+    intro: {
+      zh: "决定页面质感的，通常不是大改，而是信息密度、对齐方式和视觉重心这些小地方。",
+      en: "What defines a premium interface is rarely a big redesign. It is often density, alignment, and visual focus."
+    },
+    paragraphs: {
+      zh: [
+        "很多页面的问题不在于缺少元素，而在于所有元素都在争夺注意力。标题、按钮、卡片、颜色如果同时很强，页面就会变得嘈杂。",
+        "真正高级的页面，通常有清晰主次。用户先看到什么，再看到什么，最后在哪停下来，这些都应该被设计。",
+        "当你开始关注留白、字号对比、模块边界和文案长度时，页面会明显变得更从容。高级感并不是堆特效，而是把每个决定都做得更克制。"
+      ],
+      en: [
+        "The issue with many pages is not that they lack elements. It is that every element fights for attention at the same time. Strong titles, bright buttons, bold cards, and loud color together create noise.",
+        "Polished interfaces have clear hierarchy. What users see first, what they notice next, and where they pause should all feel intentional.",
+        "Once you start caring about whitespace, type scale, module boundaries, and copy length, the page feels calmer. Quality comes less from visual tricks and more from disciplined decisions."
+      ]
+    }
   },
   "slow-writing": {
-    title: "慢下来之后，我反而写得更快了",
-    category: "生活观察",
+    title: {
+      zh: "慢下来之后，我反而写得更快了",
+      en: "After Slowing Down, I Actually Wrote Faster"
+    },
+    category: {
+      zh: "生活观察",
+      en: "Life Notes"
+    },
     date: "2026.03.18",
-    readingTime: "4 分钟",
+    readingTime: {
+      zh: "4 分钟",
+      en: "4 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
-    intro: "当我不再追求高频输出，写作反而变得更稳定，也更接近我真正想表达的东西。",
-    paragraphs: [
-      "我以前总觉得，写作要靠自律和产量来证明。但越是逼自己持续输出，越容易在真正开始前就感到疲惫。",
-      "后来我尝试放慢一点，不要求每次都写成完整文章，而是先记录句子、想法和观察。这样做之后，真正进入写作状态反而更轻松。",
-      "慢下来不是松懈，而是给内容留出生长的空间。写得快，很多时候不是手速变快了，而是内心阻力变小了。"
-    ]
+    intro: {
+      zh: "当我不再追求高频输出，写作反而变得更稳定，也更接近我真正想表达的东西。",
+      en: "When I stopped chasing constant output, writing became steadier and closer to what I actually wanted to say."
+    },
+    paragraphs: {
+      zh: [
+        "我以前总觉得，写作要靠自律和产量来证明。但越是逼自己持续输出，越容易在真正开始前就感到疲惫。",
+        "后来我尝试放慢一点，不要求每次都写成完整文章，而是先记录句子、想法和观察。这样做之后，真正进入写作状态反而更轻松。",
+        "慢下来不是松懈，而是给内容留出生长的空间。写得快，很多时候不是手速变快了，而是内心阻力变小了。"
+      ],
+      en: [
+        "I used to think writing had to be proven through discipline and output. But the more I forced myself to publish constantly, the more tired I felt before I even began.",
+        "Later I tried slowing down. Instead of demanding a finished article each time, I started by collecting phrases, thoughts, and observations. That made the actual writing process much easier to enter.",
+        "Slowing down is not the same as giving up. It gives your ideas room to grow. Writing faster often has less to do with speed and more to do with reducing inner resistance."
+      ]
+    }
   },
   "content-planning": {
-    title: "一个人维护博客，可以如何规划内容选题？",
-    category: "创作方法",
+    title: {
+      zh: "一个人维护博客，可以如何规划内容选题？",
+      en: "How Can One Person Plan Blog Topics More Sustainably?"
+    },
+    category: {
+      zh: "创作方法",
+      en: "Creative Process"
+    },
     date: "2026.03.14",
-    readingTime: "6 分钟",
+    readingTime: {
+      zh: "6 分钟",
+      en: "6 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1400&q=80",
-    intro: "当选题不再每次从零开始，更新博客会轻松很多，也更容易形成个人风格。",
-    paragraphs: [
-      "我会把内容分成三类：持续写的核心主题、临时冒出来的灵感，以及围绕某个系列展开的长线内容。这样选题就不会全都挤在一起。",
-      "博客最适合做系列化表达。比如“设计笔记”“每周观察”“创作复盘”，这些系列会让读者更容易理解你的内容结构，也让你不必每次都重新定义方向。",
-      "规划选题的目的不是把自己绑住，而是降低开始的门槛。只要你有一个可以随时打开的题目池，更新博客这件事就会变得自然得多。"
-    ]
+    intro: {
+      zh: "当选题不再每次从零开始，更新博客会轻松很多，也更容易形成个人风格。",
+      en: "Once topics stop starting from zero every time, blogging feels lighter and your style becomes easier to recognize."
+    },
+    paragraphs: {
+      zh: [
+        "我会把内容分成三类：持续写的核心主题、临时冒出来的灵感，以及围绕某个系列展开的长线内容。这样选题就不会全都挤在一起。",
+        "博客最适合做系列化表达。比如“设计笔记”“每周观察”“创作复盘”，这些系列会让读者更容易理解你的内容结构，也让你不必每次都重新定义方向。",
+        "规划选题的目的不是把自己绑住，而是降低开始的门槛。只要你有一个可以随时打开的题目池，更新博客这件事就会变得自然得多。"
+      ],
+      en: [
+        "I like to divide ideas into three groups: core themes I return to often, spontaneous notes, and longer series that can grow over time. That keeps everything from competing in the same pile.",
+        "Blogs are especially good for serial storytelling. Things like design notes, weekly observations, or creative retrospectives help readers understand your structure and help you avoid redefining your direction every time.",
+        "Planning topics is not about locking yourself in. It is about lowering the barrier to begin. Once you have a living topic pool, updating your blog becomes much more natural."
+      ]
+    }
   },
   "homepage-invitation": {
-    title: "我喜欢的博客首页，都有一种“邀请感”",
-    category: "设计灵感",
+    title: {
+      zh: "我喜欢的博客首页，都有一种“邀请感”",
+      en: "The Blog Homepages I Love Always Feel Inviting"
+    },
+    category: {
+      zh: "设计灵感",
+      en: "Design Inspiration"
+    },
     date: "2026.03.09",
-    readingTime: "3 分钟",
+    readingTime: {
+      zh: "3 分钟",
+      en: "3 min"
+    },
     heroImage: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
-    intro: "真正让人停下来的首页，不是炫技，而是让读者一进入页面就觉得：这里值得继续看。",
-    paragraphs: [
-      "邀请感来自态度明确的标题，也来自不过度打扰的布局。页面不是在喊话，而是在向读者伸出手。",
-      "我喜欢那些第一屏就能说明内容气质的博客。它们不会急着展示一切，而是很自然地告诉你，这里写什么、怎么写、为什么值得看。",
-      "这也是我做自己博客时最在意的一点。首页不是一个目录，而是一句温和但坚定的开场白。"
-    ]
+    intro: {
+      zh: "真正让人停下来的首页，不是炫技，而是让读者一进入页面就觉得：这里值得继续看。",
+      en: "An inviting homepage does not show off. It makes readers feel, from the first screen, that this place is worth exploring."
+    },
+    paragraphs: {
+      zh: [
+        "邀请感来自态度明确的标题，也来自不过度打扰的布局。页面不是在喊话，而是在向读者伸出手。",
+        "我喜欢那些第一屏就能说明内容气质的博客。它们不会急着展示一切，而是很自然地告诉你，这里写什么、怎么写、为什么值得看。",
+        "这也是我做自己博客时最在意的一点。首页不是一个目录，而是一句温和但坚定的开场白。"
+      ],
+      en: [
+        "A sense of invitation comes from a clear title and a layout that does not over-interrupt. The page is not shouting. It is extending a hand.",
+        "I love blogs whose first screen immediately reveals the tone of the content. They do not rush to show everything. They calmly explain what is written here, how it is written, and why it matters.",
+        "That is exactly what I care about most in my own blog. A homepage is not just a directory. It is a gentle but confident opening sentence."
+      ]
+    }
   }
 };
