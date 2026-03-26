@@ -1,0 +1,18 @@
+name = "matt-blog-studio"
+main = "src/worker.js"
+compatibility_date = "2026-03-26"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "matt-blog-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+BLOG_ADMIN_USERNAME = "admin"
+BLOG_LOGIN_WINDOW_MINUTES = "15"
+BLOG_LOGIN_MAX_ATTEMPTS = "8"
+BLOG_SESSION_TTL_HOURS = "24"

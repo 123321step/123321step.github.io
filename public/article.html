@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章详情 | Matt的博客</title>
+  <meta name="description" content="博客文章详情页">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <nav class="topbar article-topbar">
+      <a class="brand" href="index.html" data-i18n="brand">Matt的博客</a>
+      <div class="nav-links article-nav-links">
+        <a href="index.html#latest" data-i18n="backToList">返回文章列表</a>
+      </div>
+      <div class="lang-switch" aria-label="Language switch">
+        <button class="lang-switch__button is-active" type="button" data-lang="zh">中</button>
+        <button class="lang-switch__button" type="button" data-lang="en">EN</button>
+      </div>
+    </nav>
+
+    <main class="article-page">
+      <article class="article-layout">
+        <header class="article-hero">
+          <p class="eyebrow" id="article-category">BLOG POST</p>
+          <h1 id="article-title">文章加载中...</h1>
+          <p class="meta" id="article-meta"></p>
+          <p class="article-intro" id="article-intro"></p>
+        </header>
+
+        <div class="article-cover" id="article-cover"></div>
+
+        <section class="article-body" id="article-body"></section>
+
+        <footer class="article-footer">
+          <a class="button button-primary" href="index.html#latest" data-i18n="backHome">回到首页继续阅读</a>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <script src="posts.js"></script>
+  <script src="article.js"></script>
+</body>
+</html>

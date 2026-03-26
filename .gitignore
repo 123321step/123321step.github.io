@@ -5,3 +5,5 @@ npm-debug.log*
 data/
 data-test/
 data-secure-test/
+.wrangler/
+.dev.vars

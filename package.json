@@ -2,13 +2,18 @@
   "name": "matt-blog-studio",
   "version": "1.0.0",
   "private": true,
-  "description": "Matt blog with a local admin studio and Node.js backend",
+  "description": "Matt blog with a local admin studio and Cloudflare backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy"
   },
   "dependencies": {
     "express": "^5.1.0",
     "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.39.0"
   }
 }
