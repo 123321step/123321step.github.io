@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客后台工作台 | Matt的博客</title>
+  <meta name="description" content="Matt 的博客后台工作台，支持文章管理、编辑、预览与本地发布。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <nav class="topbar article-topbar">
+      <a class="brand" href="index.html">Matt的博客</a>
+      <div class="nav-links article-nav-links">
+        <a href="index.html">返回首页</a>
+        <a href="article.html?post=blog-design-notes">查看文章页</a>
+      </div>
+    </nav>
+
+    <main class="admin-page admin-page--dashboard">
+      <header class="admin-header">
+        <p class="eyebrow">ADMIN STUDIO</p>
+        <h1>博客后台工作台</h1>
+        <p class="admin-subtitle">
+          这里可以管理文章、编辑中英文内容、实时预览、自动保存草稿，并把文章直接写入本地 `posts.js`。
+        </p>
+        <div class="admin-auth">
+          <div>
+            <p class="admin-toolbar__label">服务端登录</p>
+            <p class="form-note" id="auth-status">当前处于本地模式。启动 Node 服务后可以直接网页发文。</p>
+          </div>
+          <div class="admin-auth__controls">
+            <input id="admin-username" type="text" placeholder="管理员用户名" value="admin">
+            <input id="admin-password" type="password" placeholder="输入后台密码">
+            <button class="button button-secondary" type="button" id="login-button">登录后台</button>
+            <button class="button button-secondary" type="button" id="logout-button">退出</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="admin-dashboard">
+        <aside class="admin-sidebar">
+          <div class="admin-sidebar__section">
+            <div class="admin-toolbar">
+              <div>
+                <p class="admin-toolbar__label">本地文件绑定</p>
+                <h2 class="admin-panel-title">发布目标</h2>
+              </div>
+              <button class="button button-secondary" type="button" id="bind-posts-file">选择 posts.js</button>
+            </div>
+            <p class="form-note" id="file-status">尚未绑定本地 `posts.js`。发布或删除时会提示你选择文件。</p>
+          </div>
+
+          <div class="admin-sidebar__section">
+            <div class="admin-toolbar">
+              <div>
+                <p class="admin-toolbar__label">文章管理</p>
+                <h2 class="admin-panel-title">全部文章</h2>
+              </div>
+              <button class="button button-primary" type="button" id="new-post">新建文章</button>
+            </div>
+            <div class="admin-sidebar__stats">
+              <div class="admin-stat">
+                <strong id="sidebar-total">0</strong>
+                <span>总文章</span>
+              </div>
+              <div class="admin-stat">
+                <strong id="sidebar-published">0</strong>
+                <span>已发布</span>
+              </div>
+              <div class="admin-stat">
+                <strong id="sidebar-draft">0</strong>
+                <span>草稿</span>
+              </div>
+            </div>
+            <div class="admin-field">
+              <label for="post-search">搜索文章</label>
+              <input id="post-search" type="text" placeholder="输入标题或 slug">
+            </div>
+            <div class="admin-list" id="post-list"></div>
+          </div>
+        </aside>
+
+        <section class="admin-main">
+          <section class="admin-panel">
+            <div class="admin-toolbar">
+              <div>
+                <p class="admin-toolbar__label">编辑器</p>
+                <h2 class="admin-panel-title">文章内容</h2>
+              </div>
+              <div class="admin-actions">
+                <button class="button button-secondary" type="button" id="reset-form">重置表单</button>
+                <button class="button button-secondary" type="button" id="clear-draft">清空本地草稿</button>
+              </div>
+            </div>
+            <p class="form-note" id="draft-status">编辑内容会自动保存在当前浏览器中。</p>
+
+            <form class="admin-form" id="editor-form">
+              <div class="admin-field">
+                <label for="slug">文章 ID / slug</label>
+                <input id="slug" name="slug" type="text" value="new-post-demo">
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="date">发布日期</label>
+                  <input id="date" name="date" type="text" value="2026.03.26">
+                </div>
+                <div class="admin-field">
+                  <label for="status">发布状态</label>
+                  <select id="status" name="status" class="admin-select">
+                    <option value="draft">草稿</option>
+                    <option value="published">已发布</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="hero-image">封面图链接</label>
+                  <input id="hero-image" name="heroImage" type="url" value="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=80">
+                </div>
+                <div class="admin-field">
+                  <label for="hero-upload">本地上传封面图</label>
+                  <input id="hero-upload" name="heroUpload" type="file" accept="image/*">
+                </div>
+              </div>
+
+              <div class="admin-image-note" id="image-note">可以直接填图片链接，也可以选择本地图片做预览。导出时会保留当前图片地址。</div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="title-zh">中文标题</label>
+                  <input id="title-zh" name="titleZh" type="text" value="新文章标题示例">
+                </div>
+                <div class="admin-field">
+                  <label for="title-en">English Title</label>
+                  <input id="title-en" name="titleEn" type="text" value="Sample Title for a New Article">
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="category-zh">中文分类</label>
+                  <input id="category-zh" name="categoryZh" type="text" value="创作记录">
+                </div>
+                <div class="admin-field">
+                  <label for="category-en">English Category</label>
+                  <input id="category-en" name="categoryEn" type="text" value="Creative Notes">
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="reading-zh">中文阅读时长</label>
+                  <input id="reading-zh" name="readingZh" type="text" value="5 分钟">
+                </div>
+                <div class="admin-field">
+                  <label for="reading-en">English Reading Time</label>
+                  <input id="reading-en" name="readingEn" type="text" value="5 min">
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="home-summary-zh">首页卡片中文摘要</label>
+                  <textarea id="home-summary-zh" name="homeSummaryZh" rows="4">这里填写首页文章卡片要显示的短摘要。</textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="home-summary-en">Homepage Summary (EN)</label>
+                  <textarea id="home-summary-en" name="homeSummaryEn" rows="4">Write the short homepage summary used in the article card.</textarea>
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="intro-zh">中文导语</label>
+                  <textarea id="intro-zh" name="introZh" rows="4">这里填写文章导语，预览区会立刻更新。</textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="intro-en">English Intro</label>
+                  <textarea id="intro-en" name="introEn" rows="4">Write the English intro here and the preview will update instantly.</textarea>
+                </div>
+              </div>
+
+              <div class="admin-field-grid">
+                <div class="admin-field">
+                  <label for="paragraphs-zh">中文正文段落</label>
+                  <textarea id="paragraphs-zh" name="paragraphsZh" rows="10">第一段内容。
+
+第二段内容。
+
+第三段内容。</textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="paragraphs-en">English Paragraphs</label>
+                  <textarea id="paragraphs-en" name="paragraphsEn" rows="10">First paragraph.
+
+Second paragraph.
+
+Third paragraph.</textarea>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-preview-wrap">
+            <div class="admin-preview-toolbar">
+              <p class="admin-toolbar__label">预览语言</p>
+              <div class="lang-switch" aria-label="Preview language switch">
+                <button class="lang-switch__button is-active" type="button" data-preview-lang="zh">中</button>
+                <button class="lang-switch__button" type="button" data-preview-lang="en">EN</button>
+              </div>
+            </div>
+
+            <article class="article-layout admin-preview-article">
+              <header class="article-hero">
+                <p class="eyebrow" id="preview-category">创作记录</p>
+                <h1 id="preview-title">新文章标题示例</h1>
+                <p class="meta" id="preview-meta">2026.03.26 · 阅读 5 分钟</p>
+                <p class="article-intro" id="preview-intro">这里填写文章导语，预览区会立刻更新。</p>
+              </header>
+
+              <div class="article-cover" id="preview-cover"></div>
+
+              <section class="article-body" id="preview-body"></section>
+            </article>
+          </section>
+
+          <section class="admin-output">
+            <div class="admin-output__header">
+              <div>
+                <p class="admin-toolbar__label">发布操作</p>
+                <h2>文章对象与本地发布</h2>
+              </div>
+              <div class="admin-actions">
+                <button class="button button-secondary" type="button" id="export-output">导出 JSON 文件</button>
+                <button class="button button-secondary" type="button" id="publish-post">发布到本地 posts.js</button>
+                <button class="button button-danger" type="button" id="delete-post">从本地 posts.js 删除</button>
+                <button class="button button-primary" type="button" id="copy-output">复制文章对象</button>
+              </div>
+            </div>
+            <pre class="admin-code" id="generated-output"></pre>
+            <p class="form-note" id="copy-note">复制后，把内容粘贴到 `posts.js` 里作为新的文章条目即可。</p>
+          </section>
+
+          <section class="admin-output">
+            <div class="admin-output__header">
+              <div>
+                <p class="admin-toolbar__label">首页卡片辅助</p>
+                <h2>自动渲染模式已启用</h2>
+              </div>
+              <button class="button button-secondary" type="button" id="copy-card-output">复制卡片代码</button>
+            </div>
+            <pre class="admin-code" id="card-output"></pre>
+            <p class="form-note" id="card-note">首页现在会自动从 `posts.js` 渲染已发布文章。这段代码仅在你想手动插入卡片时备用。</p>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="posts.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

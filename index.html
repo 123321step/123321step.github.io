@@ -21,6 +21,7 @@
           <a href="#latest" data-i18n="navLatest">最新文章</a>
           <a href="#topics" data-i18n="navTopics">专题</a>
           <a href="#about" data-i18n="navAbout">关于我</a>
+          <a href="admin.html" data-i18n="navAdmin">后台</a>
         </div>
         <div class="lang-switch" aria-label="Language switch">
           <button class="lang-switch__button is-active" type="button" data-lang="zh">中</button>
@@ -41,7 +42,7 @@
           </div>
           <ul class="hero-stats">
             <li>
-              <strong>48</strong>
+              <strong id="published-count">0</strong>
               <span data-i18n="statPosts">原创文章</span>
             </li>
             <li>
@@ -106,40 +107,7 @@
           <p class="eyebrow" data-i18n="latestEyebrow">LATEST POSTS</p>
           <h2 data-i18n="latestTitle">最新文章</h2>
         </div>
-        <div class="post-grid">
-          <article class="post-card">
-            <a class="post-card-link" href="article.html?post=frontend-feels-premium">
-              <span class="post-category" data-i18n="post1Category">技术随笔</span>
-              <h3 data-i18n="post1Title">前端页面为什么总是“能用但不高级”？</h3>
-              <p data-i18n="post1Text">从信息层级、对齐规则和视觉焦点出发，拆解页面质感的差异到底来自哪里。</p>
-              <div class="post-meta" data-i18n="post1Meta">03.21 · 5 分钟</div>
-            </a>
-          </article>
-          <article class="post-card">
-            <a class="post-card-link" href="article.html?post=slow-writing">
-              <span class="post-category" data-i18n="post2Category">生活观察</span>
-              <h3 data-i18n="post2Title">慢下来之后，我反而写得更快了</h3>
-              <p data-i18n="post2Text">关于如何摆脱“必须持续输出”的焦虑，重新找回写作的节奏感。</p>
-              <div class="post-meta" data-i18n="post2Meta">03.18 · 4 分钟</div>
-            </a>
-          </article>
-          <article class="post-card">
-            <a class="post-card-link" href="article.html?post=content-planning">
-              <span class="post-category" data-i18n="post3Category">创作方法</span>
-              <h3 data-i18n="post3Title">一个人维护博客，可以如何规划内容选题？</h3>
-              <p data-i18n="post3Text">分享我常用的选题池、系列化写法，以及让更新更轻松的内容组织方式。</p>
-              <div class="post-meta" data-i18n="post3Meta">03.14 · 6 分钟</div>
-            </a>
-          </article>
-          <article class="post-card">
-            <a class="post-card-link" href="article.html?post=homepage-invitation">
-              <span class="post-category" data-i18n="post4Category">设计灵感</span>
-              <h3 data-i18n="post4Title">我喜欢的博客首页，都有一种“邀请感”</h3>
-              <p data-i18n="post4Text">不是夸张的视觉，而是让读者一进入页面就知道为什么要留下来。</p>
-              <div class="post-meta" data-i18n="post4Meta">03.09 · 3 分钟</div>
-            </a>
-          </article>
-        </div>
+        <div class="post-grid" id="post-grid"></div>
       </section>
 
       <section class="topics-section" id="topics">
@@ -189,6 +157,7 @@
     </main>
   </div>
 
+  <script src="posts.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

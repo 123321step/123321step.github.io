@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: matt-blog-studio
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: BLOG_ADMIN_USERNAME
+        value: admin
+      - key: BLOG_ADMIN_PASSWORD
+        sync: false
+      - key: BLOG_DATA_DIR
+        value: /opt/render/project/data
+      - key: BLOG_COOKIE_SECURE
+        value: true
+      - key: NODE_VERSION
+        value: 22.22.0
+    disk:
+      name: matt-blog-data
+      mountPath: /opt/render/project/data
+      sizeGB: 1

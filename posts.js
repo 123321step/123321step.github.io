@@ -9,9 +9,14 @@ window.BLOG_POSTS = {
       en: "Design and Writing"
     },
     date: "2026.03.25",
+    status: "published",
     readingTime: {
       zh: "8 分钟",
       en: "8 min"
+    },
+    homeSummary: {
+      zh: "分享我如何用排版、色彩和内容组织，把普通博客首页打磨成更有作品感的个人站点。",
+      en: "How typography, color, and structure helped turn a simple homepage into a more distinctive personal site."
     },
     heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=80",
     intro: {
@@ -43,9 +48,14 @@ window.BLOG_POSTS = {
       en: "Blog Building"
     },
     date: "2026.03.24",
+    status: "published",
     readingTime: {
       zh: "7 分钟",
       en: "7 min"
+    },
+    homeSummary: {
+      zh: "一个真正吸引人的博客，不靠复杂功能，而靠清晰定位、内容节奏和持续表达。",
+      en: "A compelling blog is built on clarity, rhythm, and a voice readers want to return to."
     },
     heroImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
     intro: {
@@ -75,9 +85,14 @@ window.BLOG_POSTS = {
       en: "Frontend Notes"
     },
     date: "2026.03.21",
+    status: "published",
     readingTime: {
       zh: "5 分钟",
       en: "5 min"
+    },
+    homeSummary: {
+      zh: "从层级、对齐和视觉重心出发，拆解页面为什么会显得普通，或者显得高级。",
+      en: "A closer look at hierarchy, alignment, and visual focus as the difference between ordinary and polished UI."
     },
     heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
     intro: {
@@ -107,9 +122,14 @@ window.BLOG_POSTS = {
       en: "Life Notes"
     },
     date: "2026.03.18",
+    status: "published",
     readingTime: {
       zh: "4 分钟",
       en: "4 min"
+    },
+    homeSummary: {
+      zh: "不再追求高频输出后，写作反而更稳定，也更接近真正想说的话。",
+      en: "Why letting go of constant output made writing steadier and more honest."
     },
     heroImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
     intro: {
@@ -139,9 +159,14 @@ window.BLOG_POSTS = {
       en: "Creative Process"
     },
     date: "2026.03.14",
+    status: "published",
     readingTime: {
       zh: "6 分钟",
       en: "6 min"
+    },
+    homeSummary: {
+      zh: "把选题拆成题目池、系列和临时灵感之后，一个人维护博客会轻松得多。",
+      en: "A simpler way to plan topics with idea pools, recurring series, and low-friction publishing."
     },
     heroImage: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1400&q=80",
     intro: {
@@ -171,9 +196,14 @@ window.BLOG_POSTS = {
       en: "Design Inspiration"
     },
     date: "2026.03.09",
+    status: "published",
     readingTime: {
       zh: "3 分钟",
       en: "3 min"
+    },
+    homeSummary: {
+      zh: "好的首页不是炫技，而是让读者一进入页面就自然地想留下来继续看。",
+      en: "Great homepages do not show off. They quietly make readers want to stay."
     },
     heroImage: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
     intro: {

@@ -6,9 +6,12 @@ const weatherTemp = document.querySelector("#weather-temp");
 const weatherSummary = document.querySelector("#weather-summary");
 const weatherDate = document.querySelector("#weather-date");
 const weatherIcon = document.querySelector("#weather-icon");
+const postGrid = document.querySelector("#post-grid");
+const publishedCount = document.querySelector("#published-count");
 const langButtons = document.querySelectorAll(".lang-switch__button");
 
 const preferredLanguage = localStorage.getItem("blog-language") || "zh";
+const postData = window.BLOG_POSTS || {};
 
 const UI_TEXT = {
   zh: {
@@ -18,6 +21,7 @@ const UI_TEXT = {
     navLatest: "最新文章",
     navTopics: "专题",
     navAbout: "关于我",
+    navAdmin: "后台",
     heroEyebrow: "PERSONAL BLOG",
     heroTitle: "把日常思考，写成值得回看的文字。",
     heroText: "这里记录技术、设计、生活观察和创作灵感。希望每一篇文章，都像留给未来自己的明信片。",
@@ -40,22 +44,6 @@ const UI_TEXT = {
     featuredButton: "进入文章详情",
     latestEyebrow: "LATEST POSTS",
     latestTitle: "最新文章",
-    post1Category: "技术随笔",
-    post1Title: "前端页面为什么总是“能用但不高级”？",
-    post1Text: "从信息层级、对齐规则和视觉焦点出发，拆解页面质感的差异到底来自哪里。",
-    post1Meta: "03.21 · 5 分钟",
-    post2Category: "生活观察",
-    post2Title: "慢下来之后，我反而写得更快了",
-    post2Text: "关于如何摆脱“必须持续输出”的焦虑，重新找回写作的节奏感。",
-    post2Meta: "03.18 · 4 分钟",
-    post3Category: "创作方法",
-    post3Title: "一个人维护博客，可以如何规划内容选题？",
-    post3Text: "分享我常用的选题池、系列化写法，以及让更新更轻松的内容组织方式。",
-    post3Meta: "03.14 · 6 分钟",
-    post4Category: "设计灵感",
-    post4Title: "我喜欢的博客首页，都有一种“邀请感”",
-    post4Text: "不是夸张的视觉，而是让读者一进入页面就知道为什么要留下来。",
-    post4Meta: "03.09 · 3 分钟",
     topicsEyebrow: "TOPICS",
     topicsTitle: "核心专题",
     topic1Title: "网页设计",
@@ -87,6 +75,7 @@ const UI_TEXT = {
       snowy: "有雪",
       stormy: "雷暴"
     },
+    noPosts: "暂时还没有已发布文章。",
     dateOptions: { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Shanghai" }
   },
   en: {
@@ -96,6 +85,7 @@ const UI_TEXT = {
     navLatest: "Latest",
     navTopics: "Topics",
     navAbout: "About",
+    navAdmin: "Admin",
     heroEyebrow: "PERSONAL BLOG",
     heroTitle: "Turning everyday thoughts into words worth revisiting.",
     heroText: "This is where I write about technology, design, daily observations, and creative sparks. I want every post to feel like a postcard to my future self.",
@@ -118,22 +108,6 @@ const UI_TEXT = {
     featuredButton: "Open article",
     latestEyebrow: "LATEST POSTS",
     latestTitle: "Recent Posts",
-    post1Category: "Frontend Notes",
-    post1Title: "Why do frontend pages often work but still feel unpolished?",
-    post1Text: "A look at how hierarchy, alignment, and focus shape the perceived quality of an interface.",
-    post1Meta: "03.21 · 5 min",
-    post2Category: "Life Notes",
-    post2Title: "After slowing down, I actually wrote faster",
-    post2Text: "A note on stepping away from output anxiety and finding a steadier writing rhythm again.",
-    post2Meta: "03.18 · 4 min",
-    post3Category: "Creative Process",
-    post3Title: "How can one person plan blog topics more sustainably?",
-    post3Text: "A simple approach to topic pools, series writing, and making updates easier to maintain.",
-    post3Meta: "03.14 · 6 min",
-    post4Category: "Design Inspiration",
-    post4Title: "The blog homepages I love always feel inviting",
-    post4Text: "Not because they are flashy, but because they make you want to stay from the first screen.",
-    post4Meta: "03.09 · 3 min",
     topicsEyebrow: "TOPICS",
     topicsTitle: "Core Topics",
     topic1Title: "Web Design",
@@ -165,6 +139,7 @@ const UI_TEXT = {
       snowy: "Snowy",
       stormy: "Stormy"
     },
+    noPosts: "There are no published posts yet.",
     dateOptions: { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Shanghai" }
   }
 };
@@ -208,6 +183,48 @@ function formatToday() {
   const lang = currentLanguage();
   const locale = lang === "en" ? "en-US" : "zh-CN";
   return new Intl.DateTimeFormat(locale, UI_TEXT[lang].dateOptions).format(new Date());
+}
+
+function getPublishedPosts() {
+  return Object.entries(postData)
+    .filter(([, post]) => post.status !== "draft")
+    .sort((a, b) => String(b[1].date || "").localeCompare(String(a[1].date || "")));
+}
+
+function renderPosts() {
+  if (!postGrid) {
+    return;
+  }
+
+  const lang = currentLanguage();
+  const text = UI_TEXT[lang];
+  const posts = getPublishedPosts();
+
+  if (publishedCount) {
+    publishedCount.textContent = String(posts.length);
+  }
+
+  if (!posts.length) {
+    postGrid.innerHTML = `<article class="post-card"><div class="post-card-link"><h3>${text.noPosts}</h3></div></article>`;
+    return;
+  }
+
+  postGrid.innerHTML = posts.map(([slug, post]) => {
+    const category = post.category?.[lang] || "";
+    const title = post.title?.[lang] || slug;
+    const summary = post.homeSummary?.[lang] || post.intro?.[lang] || "";
+    const reading = post.readingTime?.[lang] || "";
+    const meta = `${post.date || ""} · ${reading}`;
+
+    return `<article class="post-card">
+      <a class="post-card-link" href="article.html?post=${slug}">
+        <span class="post-category">${category}</span>
+        <h3>${title}</h3>
+        <p>${summary}</p>
+        <div class="post-meta">${meta}</div>
+      </a>
+    </article>`;
+  }).join("");
 }
 
 function renderWeather(state) {
@@ -323,6 +340,7 @@ function applyLanguage(lang) {
     button.classList.toggle("is-active", button.dataset.lang === lang);
   });
 
+  renderPosts();
   loadWeather();
 }
 
