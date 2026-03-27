@@ -1,73 +1,88 @@
 # Matt Blog Studio Deployment
 
-## Local run
+详细文档请优先查看：
+
+- `USER_MANUAL.md`
+- `SOURCE_AND_DEPLOYMENT_GUIDE.md`
+
+这份文件保留为快速部署摘要。
+
+## 1. 本地运行
 
 ```powershell
-cd C:\Users\Administrator\Documents\blog-site
+cd "C:\Users\Administrator\Documents\blog-site"
 npm install
 $env:BLOG_ADMIN_USERNAME="admin"
 $env:BLOG_ADMIN_PASSWORD="replace-with-a-strong-password"
 npm start
 ```
 
-Open:
+打开：
 
 - `http://localhost:3000/`
 - `http://localhost:3000/admin.html`
 
-Default admin account in development:
+## 2. Cloudflare 免费部署
 
-- username: `admin`
-- password: `admin123`
+### 安装依赖
 
-## Recommended free deployment path
+```powershell
+cd "C:\Users\Administrator\Documents\blog-site"
+npm install
+```
 
-This project now supports a Cloudflare deployment path using:
+### 登录 Cloudflare
 
-1. Cloudflare Workers
-2. Cloudflare D1
-3. Static assets from the `public/` directory
+```powershell
+npx wrangler login
+```
 
-This path is recommended when you want:
+### 创建 D1 数据库
 
-- a free-first deployment
-- no traditional server to manage
-- a browser admin panel plus a hosted API
+```powershell
+npx wrangler d1 create matt-blog-db
+```
 
-## Storage
+### 初始化数据库
 
-There are now two storage modes:
+```powershell
+npx wrangler d1 execute matt-blog-db --remote --file=schema.sql
+```
 
-1. Local Node mode:
-   - SQLite file at `./data/blog.sqlite`
-2. Cloudflare mode:
-   - D1 database bound as `DB`
+### 设置后台密码
 
-In both modes, the frontend still reads `/posts.js`.
+```powershell
+npx wrangler secret put BLOG_ADMIN_PASSWORD
+```
 
-## Cloudflare deployment checklist
+### 部署
 
-1. Install Wrangler locally:
-   - `npm install`
-2. Log in to Cloudflare:
-   - `npx wrangler login`
-3. Create a D1 database:
-   - `npx wrangler d1 create matt-blog-db`
-4. Copy the returned `database_id` into `wrangler.toml`
-5. Apply schema:
-   - `npx wrangler d1 execute matt-blog-db --file=schema.sql`
-6. Add your secret password:
-   - `npx wrangler secret put BLOG_ADMIN_PASSWORD`
-7. Optionally change username in `wrangler.toml`
-8. Deploy:
-   - `npx wrangler deploy`
-9. Open `/admin.html`, log in, then click `导入现有文章`
+```powershell
+npx wrangler deploy
+```
 
-## Before public production
+## 3. 更新线上版本
 
-Recommended next hardening steps:
+只要你修改了下面这些内容，就需要重新部署：
 
-1. If you want multiple editors, add a real users table with hashed passwords
-2. Add CSRF protection for admin write actions
-3. Add password hashing instead of plain env-var comparison
-4. Add richer field validation and audit logging
+- `public/*`
+- `src/worker.js`
+- `schema.sql`
+- `wrangler.toml`
+
+重新部署命令：
+
+```powershell
+npx wrangler deploy
+```
+
+## 4. 当前线上地址
+
+- 前台首页：`https://matt-blog-studio.mattblogstudio.workers.dev`
+- 后台入口：`https://matt-blog-studio.mattblogstudio.workers.dev/admin.html`
+
+## 5. 注意
+
+当前使用的是 `workers.dev` 域名。
+
+这类域名在中国大陆访问不稳定。如果你要给中国大陆用户稳定访问，建议后续接入自定义域名并规划更适合大陆访问的部署方式。

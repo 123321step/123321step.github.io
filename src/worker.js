@@ -234,6 +234,19 @@ async function bootstrapSeedData(env, request) {
   return json({ ok: true, imported: Object.keys(seedPosts).length });
 }
 
+async function ensureSeedData(env, request) {
+  const postsRow = await env.DB.prepare("SELECT COUNT(*) AS count FROM posts").first();
+  if (Number(postsRow?.count || 0) > 0) {
+    return;
+  }
+
+  const seedResponse = await env.ASSETS.fetch(new Request(new URL("/posts.seed.json", request.url)));
+  const seedPosts = await seedResponse.json();
+  for (const [slug, post] of Object.entries(seedPosts)) {
+    await upsertPost(env, slug, post);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -279,6 +292,7 @@ export default {
     }
 
     if (url.pathname === "/api/posts" && request.method === "GET") {
+      await ensureSeedData(env, request);
       return json(await getPostsMap(env));
     }
 
@@ -286,6 +300,7 @@ export default {
       const slug = decodeURIComponent(url.pathname.slice("/api/posts/".length));
 
       if (request.method === "GET") {
+        await ensureSeedData(env, request);
         const post = await getPostBySlug(env, slug);
         return post ? json(post) : json({ error: "Post not found" }, 404);
       }
@@ -311,6 +326,7 @@ export default {
     }
 
     if (url.pathname === "/posts.js" && request.method === "GET") {
+      await ensureSeedData(env, request);
       return text(serializePosts(await getPostsMap(env)), 200, { "content-type": "application/javascript; charset=utf-8" });
     }
 

@@ -1,4 +1,4 @@
-const editorForm = document.querySelector("#editor-form");
+﻿const editorForm = document.querySelector("#editor-form");
 const selector = document.querySelector("#post-selector");
 const resetButton = document.querySelector("#reset-form");
 const clearDraftButton = document.querySelector("#clear-draft");
@@ -58,7 +58,7 @@ const DEFAULT_DRAFT = {
   categoryEn: "Creative Notes",
   readingZh: "5 分钟",
   readingEn: "5 min",
-  homeSummaryZh: "这里填写首页文章卡片要显示的短摘要。",
+  homeSummaryZh: "这里填写首页文章卡片要显示的中文摘要。",
   homeSummaryEn: "Write the short homepage summary used in the article card.",
   introZh: "这里填写文章导语，预览区会立刻更新。",
   introEn: "Write the English intro here and the preview will update instantly.",
@@ -153,7 +153,7 @@ function buildHomepageCardSnippet(state) {
     <span class="post-category">${escapeForTemplate(state.categoryZh)}</span>
     <h3>${escapeForTemplate(state.titleZh)}</h3>
     <p>${escapeForTemplate(state.homeSummaryZh)}</p>
-    <div class="post-meta">${escapeForTemplate(state.date)} · ${escapeForTemplate(state.readingZh)}</div>
+    <div class="post-meta">${escapeForTemplate(state.date)} 路 ${escapeForTemplate(state.readingZh)}</div>
   </a>
 </article>`;
 }
@@ -182,13 +182,13 @@ function renderOutput(state) {
 }
 
 function renderSelectorOptions() {
-  selector.innerHTML = '<option value="">新建文章草稿</option>';
+  selector.innerHTML = '<option value="">鏂板缓鏂囩珷鑽夌</option>';
   Object.entries(postsCache)
     .sort((a, b) => String(b[1].date || "").localeCompare(String(a[1].date || "")))
     .forEach(([slug, post]) => {
       const option = document.createElement("option");
       option.value = slug;
-      option.textContent = `${slug} · ${post.title?.zh || slug}`;
+      option.textContent = `${slug} 路 ${post.title?.zh || slug}`;
       selector.appendChild(option);
     });
   selector.value = activeSlug;
@@ -242,7 +242,7 @@ function updateAuthStatus(message, success = true) {
 
 function saveDraft(state) {
   localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
-  draftStatus.textContent = `草稿已自动保存：${new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+  draftStatus.textContent = `鑽夌宸茶嚜鍔ㄤ繚瀛橈細${new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
   draftStatus.classList.add("success");
 }
 
@@ -333,7 +333,7 @@ async function choosePostsFile() {
     types: [{ description: "JavaScript files", accept: { "text/javascript": [".js"] } }]
   });
   postsFileHandle = handle;
-  updateFileStatus(`已绑定本地文件：${handle.name}`);
+  updateFileStatus(`宸茬粦瀹氭湰鍦版枃浠讹細${handle.name}`);
   return handle;
 }
 
@@ -361,12 +361,14 @@ async function apiRequest(url, options = {}) {
     ...options
   });
 
+  const text = await response.text();
+  const data = text ? JSON.parse(text) : {};
+
   if (!response.ok) {
-    throw new Error(`request failed: ${response.status}`);
+    throw new Error(data?.error || `request failed: ${response.status}`);
   }
 
-  const text = await response.text();
-  return text ? JSON.parse(text) : {};
+  return data;
 }
 
 async function refreshPostsFromApi() {
@@ -383,14 +385,14 @@ async function detectBackend() {
     backendAuthenticated = Boolean(status.authenticated);
     updateAuthStatus(
       backendAuthenticated
-        ? "已连接到服务端后台，并且当前已登录。"
-        : "已检测到服务端后台。输入密码后可以直接网页发文。"
+        ? "已连接到云端后台，并且当前已登录。"
+        : "已检测到云端后台。输入密码后即可直接发布文章。"
     );
     await refreshPostsFromApi();
   } catch {
     backendAvailable = false;
     backendAuthenticated = false;
-    updateAuthStatus("当前处于本地模式。启动 Node 服务后可以直接网页发文。", false);
+    updateAuthStatus("当前处于本地模式。启动服务后可直接网页发文。", false);
   }
 }
 
@@ -407,7 +409,7 @@ async function loginToBackend() {
   });
   backendAuthenticated = true;
   passwordInput.value = "";
-  updateAuthStatus("登录成功，现在可以直接发布到服务端。");
+  updateAuthStatus("登录成功，现在可以直接发布到云端。");
   await refreshPostsFromApi();
 }
 
@@ -417,7 +419,7 @@ async function logoutFromBackend() {
   }
   await apiRequest("/api/auth/logout", { method: "POST" });
   backendAuthenticated = false;
-  updateAuthStatus("已退出服务端后台，当前只能使用本地模式。", false);
+  updateAuthStatus("已退出后台登录。", false);
 }
 
 async function publishCurrentPost() {
@@ -480,10 +482,10 @@ bindPostsFileButton.addEventListener("click", () => {
 });
 newPostButton.addEventListener("click", () => fillForm(DEFAULT_DRAFT));
 loginButton.addEventListener("click", () => {
-  loginToBackend().catch(() => updateAuthStatus("登录失败，请确认密码是否正确。", false));
+  loginToBackend().catch((error) => updateAuthStatus(`登录失败：${error.message}`, false));
 });
 logoutButton.addEventListener("click", () => {
-  logoutFromBackend().catch(() => updateAuthStatus("退出失败，请稍后重试。", false));
+  logoutFromBackend().catch((error) => updateAuthStatus(`退出失败：${error.message}`, false));
 });
 bootstrapButton.addEventListener("click", () => {
   apiRequest("/api/admin/bootstrap", { method: "POST" })
@@ -491,22 +493,22 @@ bootstrapButton.addEventListener("click", () => {
       updateAuthStatus(
         result.skipped
           ? "数据库里已经有文章了，已跳过导入。"
-          : `已导入 ${result.imported} 篇现有文章到数据库。`
+          : `已导入 ${result.imported} 篇现有文章到云端数据库。`
       );
       return refreshPostsFromApi();
     })
-    .catch(() => {
-      updateAuthStatus("导入失败。请先登录后台，再重试导入。", false);
+    .catch((error) => {
+      updateAuthStatus(`导入失败：${error.message}`, false);
     });
 });
 
 copyButton.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(output.textContent);
-    copyNote.textContent = "已复制到剪贴板。";
+    copyNote.textContent = "文章对象已复制到剪贴板。";
     copyNote.classList.add("success");
   } catch {
-    copyNote.textContent = "复制失败，请手动复制上方生成结果。";
+    copyNote.textContent = "复制失败，请手动复制上方内容。";
     copyNote.classList.remove("success");
   }
 });
@@ -521,7 +523,7 @@ exportButton.addEventListener("click", () => {
   link.download = `${state.slug || "blog-post"}.json`;
   link.click();
   URL.revokeObjectURL(url);
-  copyNote.textContent = "已导出 JSON 文件。";
+  copyNote.textContent = "JSON 文件已导出。";
   copyNote.classList.add("success");
 });
 
@@ -530,13 +532,13 @@ publishButton.addEventListener("click", () => {
     .then((mode) => {
       copyNote.textContent =
         mode === "server"
-          ? "已通过服务端保存文章。刷新首页后就能看到最新内容。"
-          : "已写入本地 posts.js。首页和文章页都会自动读取这篇文章。";
+          ? "文章已发布到云端数据库，刷新首页后就能看到最新内容。"
+          : "文章已写入本地 posts.js。";
       copyNote.classList.add("success");
       saveDraft(getFormState());
     })
-    .catch(() => {
-      copyNote.textContent = "发布失败。请确认 slug 不为空，并检查服务端登录或本地文件绑定状态。";
+    .catch((error) => {
+      copyNote.textContent = `发布失败：${error.message}`;
       copyNote.classList.remove("success");
     });
 });
@@ -547,8 +549,8 @@ deleteButton.addEventListener("click", () => {
       copyNote.textContent = "当前文章已删除。";
       copyNote.classList.add("success");
     })
-    .catch(() => {
-      copyNote.textContent = "删除失败。请先选择一篇已存在文章，并检查服务端登录或本地文件绑定状态。";
+    .catch((error) => {
+      copyNote.textContent = `删除失败：${error.message}`;
       copyNote.classList.remove("success");
     });
 });
@@ -559,7 +561,7 @@ copyCardButton.addEventListener("click", async () => {
     cardNote.textContent = "首页卡片代码已复制。";
     cardNote.classList.add("success");
   } catch {
-    cardNote.textContent = "复制失败，请手动复制上方首页卡片代码。";
+    cardNote.textContent = "复制失败，请手动复制上方卡片代码。";
     cardNote.classList.remove("success");
   }
 });
@@ -587,7 +589,6 @@ previewButtons.forEach((button) => {
     syncAll();
   });
 });
-
 renderSelectorOptions();
 renderSidebarList();
 const savedDraft = loadSavedDraft();

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>博客后台工作台 | Matt的博客</title>
-  <meta name="description" content="Matt 的博客后台工作台，支持文章管理、编辑、预览与本地发布。">
+  <meta name="description" content="Matt 的博客后台工作台，支持文章管理、编辑、预览与云端发布。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,19 +25,19 @@
         <p class="eyebrow">ADMIN STUDIO</p>
         <h1>博客后台工作台</h1>
         <p class="admin-subtitle">
-          这里可以管理文章、编辑中英文内容、实时预览、自动保存草稿，并把文章直接写入本地 `posts.js`。
+          在这里管理文章、实时预览中英文内容，并将文章直接发布到云端数据库。
         </p>
         <div class="admin-auth">
           <div>
             <p class="admin-toolbar__label">服务端登录</p>
-            <p class="form-note" id="auth-status">当前处于本地模式。启动 Node 服务后可以直接网页发文。</p>
+            <p class="form-note" id="auth-status">当前处于云端模式。登录后即可直接发布文章到网站。</p>
           </div>
           <div class="admin-auth__controls">
             <input id="admin-username" type="text" placeholder="管理员用户名" value="admin">
             <input id="admin-password" type="password" placeholder="输入后台密码">
             <button class="button button-secondary" type="button" id="login-button">登录后台</button>
             <button class="button button-secondary" type="button" id="bootstrap-button">导入现有文章</button>
-            <button class="button button-secondary" type="button" id="logout-button">退出</button>
+            <button class="button button-secondary" type="button" id="logout-button">退出登录</button>
           </div>
         </div>
       </header>
@@ -47,12 +47,12 @@
           <div class="admin-sidebar__section">
             <div class="admin-toolbar">
               <div>
-                <p class="admin-toolbar__label">本地文件绑定</p>
-                <h2 class="admin-panel-title">发布目标</h2>
+                <p class="admin-toolbar__label">发布目标</p>
+                <h2 class="admin-panel-title">当前状态</h2>
               </div>
               <button class="button button-secondary" type="button" id="bind-posts-file">选择 posts.js</button>
             </div>
-            <p class="form-note" id="file-status">尚未绑定本地 `posts.js`。发布或删除时会提示你选择文件。</p>
+            <p class="form-note" id="file-status">当前线上版本会直接发布到云端数据库，不需要绑定本地 posts.js。</p>
           </div>
 
           <div class="admin-sidebar__section">
@@ -101,6 +101,13 @@
 
             <form class="admin-form" id="editor-form">
               <div class="admin-field">
+                <label for="post-selector">选择现有文章</label>
+                <select id="post-selector" class="admin-select">
+                  <option value="">新建文章草稿</option>
+                </select>
+              </div>
+
+              <div class="admin-field">
                 <label for="slug">文章 ID / slug</label>
                 <input id="slug" name="slug" type="text" value="new-post-demo">
               </div>
@@ -125,12 +132,12 @@
                   <input id="hero-image" name="heroImage" type="url" value="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=80">
                 </div>
                 <div class="admin-field">
-                  <label for="hero-upload">本地上传封面图</label>
+                  <label for="hero-upload">上传本地封面图</label>
                   <input id="hero-upload" name="heroUpload" type="file" accept="image/*">
                 </div>
               </div>
 
-              <div class="admin-image-note" id="image-note">可以直接填图片链接，也可以选择本地图片做预览。导出时会保留当前图片地址。</div>
+              <div class="admin-image-note" id="image-note">可以直接填写图片链接，也可以上传本地图片做预览。</div>
 
               <div class="admin-field-grid">
                 <div class="admin-field">
@@ -168,7 +175,7 @@
               <div class="admin-field-grid">
                 <div class="admin-field">
                   <label for="home-summary-zh">首页卡片中文摘要</label>
-                  <textarea id="home-summary-zh" name="homeSummaryZh" rows="4">这里填写首页文章卡片要显示的短摘要。</textarea>
+                  <textarea id="home-summary-zh" name="homeSummaryZh" rows="4">这里填写首页文章卡片要显示的中文摘要。</textarea>
                 </div>
                 <div class="admin-field">
                   <label for="home-summary-en">Homepage Summary (EN)</label>
@@ -235,17 +242,17 @@ Third paragraph.</textarea>
             <div class="admin-output__header">
               <div>
                 <p class="admin-toolbar__label">发布操作</p>
-                <h2>文章对象与本地发布</h2>
+                <h2>文章对象与云端发布</h2>
               </div>
               <div class="admin-actions">
                 <button class="button button-secondary" type="button" id="export-output">导出 JSON 文件</button>
-                <button class="button button-secondary" type="button" id="publish-post">发布到本地 posts.js</button>
-                <button class="button button-danger" type="button" id="delete-post">从本地 posts.js 删除</button>
+                <button class="button button-secondary" type="button" id="publish-post">发布到云端</button>
+                <button class="button button-danger" type="button" id="delete-post">删除云端文章</button>
                 <button class="button button-primary" type="button" id="copy-output">复制文章对象</button>
               </div>
             </div>
             <pre class="admin-code" id="generated-output"></pre>
-            <p class="form-note" id="copy-note">复制后，把内容粘贴到 `posts.js` 里作为新的文章条目即可。</p>
+            <p class="form-note" id="copy-note">发布失败时，这里会显示具体原因，比如未登录、slug 不合法或正文未填写完整。</p>
           </section>
 
           <section class="admin-output">
@@ -257,7 +264,7 @@ Third paragraph.</textarea>
               <button class="button button-secondary" type="button" id="copy-card-output">复制卡片代码</button>
             </div>
             <pre class="admin-code" id="card-output"></pre>
-            <p class="form-note" id="card-note">首页现在会自动从 `posts.js` 渲染已发布文章。这段代码仅在你想手动插入卡片时备用。</p>
+            <p class="form-note" id="card-note">首页现在会自动从文章数据中渲染已发布文章。这段代码仅在你想手动插入卡片时备用。</p>
           </section>
         </section>
       </section>

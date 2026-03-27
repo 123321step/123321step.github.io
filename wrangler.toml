@@ -9,7 +9,7 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "matt-blog-db"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "29535c98-df07-4da4-8b90-91c142095b03"
 
 [vars]
 BLOG_ADMIN_USERNAME = "admin"
